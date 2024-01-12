@@ -55,7 +55,6 @@ print(np.min(first_image), np.max(first_image))
 
 
 num_classes = len(class_names)
-
 model = Sequential([
   layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
   layers.Conv2D(16, 3, padding='same', activation='relu'),
@@ -74,7 +73,8 @@ model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
-epochs=10
+epochs=3
+
 history = model.fit(
   train_ds,
   validation_data=val_ds,
