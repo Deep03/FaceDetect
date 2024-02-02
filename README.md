@@ -1,6 +1,6 @@
 # Face Authentication System Using Facenet Unified Embedding
 
-This project is an implementation of the ["FaceNet: A Unified Embedding for Face Recognition and Clustering"](https://arxiv.org/pdf/1503.03832.pdf), utilizing TensorFlow for the machine learning architecture. The core idea behind this system is to enable secure user authentication through facial recognition.
+This project is an implementation of the [FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/pdf/1503.03832.pdf), utilizing TensorFlow for the machine learning architecture. The core idea behind this system is to enable secure user authentication through facial recognition.
 
 ## Overview
 
