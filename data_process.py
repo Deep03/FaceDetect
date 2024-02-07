@@ -1,5 +1,4 @@
 # Import dependencies
-import cv2
 import os
 import random
 import numpy as np
@@ -16,3 +15,4 @@ import uuid
 POS_PATH = os.path.join('test', 'positive')
 NEG_PATH = os.path.join('test', 'negative')
 ANC_PATH = os.path.join('test', 'anchor')
+
