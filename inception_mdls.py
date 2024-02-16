@@ -4,7 +4,8 @@ import tensorflow as tf
 import keras
 from keras.layers import Conv2D, MaxPooling2D, concatenate, GlobalAveragePooling2D, Dense, BatchNormalization
 
-# Load InceptionV3 without the top classification layer
+
+# FIX NEEDED: Add inception v3 layer to improve model
 def inception_v3(input_shape):
     inception_layer = keras.applications.InceptionV3(
         include_top=False,
@@ -15,7 +16,7 @@ def inception_v3(input_shape):
     return inception_layer
 
 
-    
+# derived from Going deeper with convolutions: https://arxiv.org/pdf/1409.4842.pdf
 def inception_module(x, filters_1x1, filters_3x3_reduce, filters_3x3, filters_5x5_reduce, filters_5x5, filters_pool_proj, name):
     conv1x1 = Conv2D(filters_1x1, (1, 1), padding='same', activation='relu', name=name+'_1x1')(x)
 
