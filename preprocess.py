@@ -11,7 +11,7 @@ import tensorflow as tf
 import triplet_loss as tl
 import cv2
 from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
-import model
+import facenet_model
 
 DATA_DIR = os.path.dirname('test/')
 
@@ -128,4 +128,4 @@ def prepare_labels(triplets, model):
 
 # Assuming you have your FaceNet model stored in `model`
 # And your triplets organized in `triplet_batch`
-y_train = prepare_labels(x_train, model)
+y_train = prepare_labels(x_train, facenet_model)

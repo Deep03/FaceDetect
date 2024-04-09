@@ -9,8 +9,8 @@ from keras.layers import Conv2D, MaxPooling2D, concatenate, GlobalAveragePooling
 def inception_v3(input_shape):
     inception_layer = keras.applications.InceptionV3(
         include_top=False,
-        weights=None,  # You can specify 'None' to start with random weights
-        input_shape=input_shape,  # Adjust input shape based on your requirements,
+        weights=None,  
+        input_shape=input_shape
     )
 
     return inception_layer
