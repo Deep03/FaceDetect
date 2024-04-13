@@ -3,6 +3,11 @@ from keras.models import Model
 from keras.optimizers import Adam
 from inception_mdls import inception_module
 from triplet_loss import triplet_loss
+import numpy as np
+import cv2
+import os
+
+DATA_DIR = "test/"
 
 def model(input_emd):
    # Conv1
@@ -37,7 +42,7 @@ def model(input_emd):
 
    fully_conn = Dense(128, activation='relu', name='fully_conn')(avgpool)
 
-   fully_conn = Dense(2000)(fully_conn)
+   fully_conn = Dense(500)(fully_conn)
 
    global_avg_pool = GlobalAveragePooling2D()(fully_conn)
 
@@ -56,10 +61,20 @@ def model(input_emd):
 input_layer = Input(shape=(112, 112, 3), name='input_layer')
 facenet_model = model(input_layer)
 
-ANCHOR = Input(shape=(112, 112, 3), name='anchor_emd')
-POSITIVE =  Input(shape=(112, 112, 3), name='positive_emd')
-NEGATIVE =  Input(shape=(112, 112, 3), name='negative_emd')
+def get_image(dataset_path, person, index):
+    img = cv2.imread(os.path.join(dataset_path, person, index))
+    if img is None:
+        raise ValueError(f"Could not read image: {os.path.join(dataset_path, person, index)}")
+    img = np.asarray(img, dtype=np.float64)
+    if np.max(img) == 0:
+        raise ZeroDivisionError("Image has all zero pixel values. Normalization not possible.")
+    img -= np.min(img)  
+    img /= (np.max(img) - np.min(img))  
+    img = np.expand_dims(img, axis=0)  
+    return img
+    
+data = get_image(DATA_DIR, "0", "0.png")
 
-anchor_emd = facenet_model(ANCHOR)
-positive_emd = facenet_model(POSITIVE)
-negative_emd = facenet_model(NEGATIVE)
+
+input_emd = facenet_model.predict(data)
+print(input_emd.max())
